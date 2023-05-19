@@ -13,7 +13,12 @@ SingUPRoutes.post("/", (req, res, next) => {
         `INSERT INTO todousers (name,email) VALUES ($1,$2)`,
         [name, email],
         (error, result) => {
-          clinet.end();
+          clinet.end((err) => {
+            console.log("client has disconnected");
+            if (err) {
+              console.log("error during disconnection", err.stack);
+            }
+          });
           if (error) {
             next({ error: error.name });
           }

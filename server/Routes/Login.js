@@ -9,8 +9,8 @@ LoginRoute.post("/", (req, res, next) => {
       client.query(
         `SELECT name, email FROM todousers where name =$1 AND email = $2`,
         [name, email],
-        (error, result) => {
-          client.end();
+        async (error, result) => {
+          await client.end();
           if (error) {
             next({ error: error.name });
           }

@@ -1,12 +1,15 @@
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [userdata, setuserdata] = useState({
     name: "testname",
     email: "test@mail.com",
   });
+
+  const navigate = useNavigate();
 
   function LoginAPi() {
     fetch("http://localhost:3001/Login", {
@@ -19,7 +22,9 @@ export default function Login() {
       .then(async (response) => {
         if (response.ok) {
           let data = await response.json();
-          console.log(data);
+          if (data.message === "1") {
+            navigate("/playground");
+          }
         }
       })
       .catch((error) => {
