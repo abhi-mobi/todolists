@@ -9,7 +9,13 @@ export default function Login() {
   });
 
   function LoginAPi() {
-    fetch("http://localhost:3001/Login")
+    fetch("http://localhost:3001/Login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userdata),
+    })
       .then(async (response) => {
         if (response.ok) {
           let data = await response.json();
